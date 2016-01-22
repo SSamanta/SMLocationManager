@@ -48,7 +48,7 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
         let location = locations.last! as CLLocation
         let eventDate = location.timestamp
         let howRecent = eventDate.timeIntervalSinceNow
-        if (abs(howRecent) < 15.0) {
+        if (abs(howRecent) < 1.0) {
            return location
         }
         return nil

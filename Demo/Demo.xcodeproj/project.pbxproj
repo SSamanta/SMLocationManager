@@ -13,6 +13,8 @@
 		1CACA9AB1C5234B800D0CD85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA9A21C5234B800D0CD85 /* AppDelegate.swift */; };
 		1CACA9AC1C5234B800D0CD85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACA9A51C5234B800D0CD85 /* LaunchScreen.storyboard */; };
 		1CACA9AD1C5234B800D0CD85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACA9A71C5234B800D0CD85 /* Main.storyboard */; };
+		1CACA9B71C5237E100D0CD85 /* SMLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CACA9B51C5237C700D0CD85 /* SMLocationManager.framework */; };
+		1CACA9B81C5237E100D0CD85 /* SMLocationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1CACA9B51C5237C700D0CD85 /* SMLocationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +27,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1CACA9B21C52374E00D0CD85 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1CACA9B81C5237E100D0CD85 /* SMLocationManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1CACA9781C522E0D00D0CD85 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CACA9821C522E0D00D0CD85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -36,6 +52,7 @@
 		1CACA9A21C5234B800D0CD85 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CACA9A61C5234B800D0CD85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1CACA9A81C5234B800D0CD85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1CACA9B51C5237C700D0CD85 /* SMLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMLocationManager.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CACA9B71C5237E100D0CD85 /* SMLocationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +98,7 @@
 				1CACA9821C522E0D00D0CD85 /* Assets.xcassets */,
 				1CACA99D1C5234B800D0CD85 /* Configs */,
 				1CACA99F1C5234B800D0CD85 /* Controller */,
+				1CACA9B31C5237C700D0CD85 /* External */,
 				1CACA9A11C5234B800D0CD85 /* Main */,
 				1CACA9A31C5234B800D0CD85 /* Model */,
 				1CACA9A41C5234B800D0CD85 /* View */,
@@ -136,6 +155,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1CACA9B31C5237C700D0CD85 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				1CACA9B41C5237C700D0CD85 /* SMLocationManager */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		1CACA9B41C5237C700D0CD85 /* SMLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1CACA9B51C5237C700D0CD85 /* SMLocationManager.framework */,
+			);
+			path = SMLocationManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +181,7 @@
 				1CACA9741C522E0D00D0CD85 /* Sources */,
 				1CACA9751C522E0D00D0CD85 /* Frameworks */,
 				1CACA9761C522E0D00D0CD85 /* Resources */,
+				1CACA9B21C52374E00D0CD85 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -372,6 +408,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo/External/SMLocationManager",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.susim.Demo;
@@ -383,6 +423,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo/External/SMLocationManager",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.susim.Demo;
