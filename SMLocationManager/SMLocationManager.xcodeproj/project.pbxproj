@@ -10,6 +10,7 @@
 		1CACA9591C522DC100D0CD85 /* SMLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CACA9581C522DC100D0CD85 /* SMLocationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CACA9601C522DC100D0CD85 /* SMLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CACA9551C522DC100D0CD85 /* SMLocationManager.framework */; };
 		1CACA9651C522DC100D0CD85 /* SMLocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA9641C522DC100D0CD85 /* SMLocationManagerTests.swift */; };
+		1CACA99C1C522FBA00D0CD85 /* SMLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA99B1C522FBA00D0CD85 /* SMLocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		1CACA95F1C522DC100D0CD85 /* SMLocationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMLocationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CACA9641C522DC100D0CD85 /* SMLocationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMLocationManagerTests.swift; sourceTree = "<group>"; };
 		1CACA9661C522DC100D0CD85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CACA99B1C522FBA00D0CD85 /* SMLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMLocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				1CACA9581C522DC100D0CD85 /* SMLocationManager.h */,
+				1CACA99B1C522FBA00D0CD85 /* SMLocationManager.swift */,
 				1CACA95A1C522DC100D0CD85 /* Info.plist */,
 			);
 			path = SMLocationManager;
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CACA99C1C522FBA00D0CD85 /* SMLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +312,7 @@
 		1CACA96A1C522DC100D0CD85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +323,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.susim.SMLocationManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1CACA96B1C522DC100D0CD85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -376,6 +383,7 @@
 				1CACA96B1C522DC100D0CD85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1CACA96C1C522DC100D0CD85 /* Build configuration list for PBXNativeTarget "SMLocationManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -384,6 +392,7 @@
 				1CACA96E1C522DC100D0CD85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
