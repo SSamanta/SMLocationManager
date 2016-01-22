@@ -414,7 +414,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.susim.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.susim.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -429,7 +429,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Configs/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.susim.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.susim.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

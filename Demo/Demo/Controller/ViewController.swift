@@ -10,12 +10,15 @@ import UIKit
 import SMLocationManager
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var locationLabel : UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let locationManager = SMLocationManager()
-        locationManager.startStandardUpdated { (location, error) -> Void in
-            print(location,error)
+        locationManager.startStandardUpdated {[weak self](location, error) -> Void in
+            if self != nil {
+                self!.locationLabel.text = "\(location) \(error)"
+            }
         }
     }
 

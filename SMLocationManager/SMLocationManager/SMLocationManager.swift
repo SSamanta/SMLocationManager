@@ -16,26 +16,26 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     var locationHandler : LocationHandler?
     
     public func startStandardUpdated(handler :LocationHandler) {
-        self.locationHandler =  handler
-        self.locationManager.delegate = self
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
-            locationManager.requestAlwaysAuthorization() 
+        if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+            self.locationHandler =  handler
+            self.locationManager.delegate = self
+            self.locationManager.allowsBackgroundLocationUpdates = true
+            self.locationManager.startUpdatingLocation()
+        }else  if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+            self.locationManager.requestAlwaysAuthorization()
         }
-        locationManager.distanceFilter  = 500
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.startUpdatingLocation()
     }
     //MARK: Location Manager Delegate
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = self.getRecentLocation(locations) {
-            if locationHandler != nil {
-                locationHandler!(location: location,error: nil)
+            if self.locationHandler != nil {
+                self.locationHandler!(location: location,error: nil)
             }
         }
     }
     public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-         if locationHandler != nil {
-            locationHandler!(location: nil,error: error)
+         if self.locationHandler != nil {
+            self.locationHandler!(location: nil,error: error)
         }
     }
     //MARK: Stop Standard updates
