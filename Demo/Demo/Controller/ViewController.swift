@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let locationManager = SMLocationManager()
         locationManager.startStandardUpdated { (location, error) -> Void in
-            print(location)
+            print(location,error)
         }
     }
 
