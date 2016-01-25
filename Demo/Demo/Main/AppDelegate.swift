@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationUpdated:", name: "kLocationUpdated", object: nil)
             }
         }
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge], categories: nil))
         self.startTrackingLocation()
         return true
     }
@@ -60,20 +61,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func locationUpdated(notification : NSNotification) {
         let locatinDict = notification.userInfo
-        SMLocationManager.getUserLocationAddress(locatinDict!["location"] as! CLLocation, handler: { (address, error) -> Void in
-            let addressString = address! as String
-            self.showLocalNotification(addressString) // You can update address into your backend
+        let location = locatinDict!["location"] as! CLLocation
+        let locationDetails = "Speed : \(location.speed) m/s \nAltitude: \(location.altitude) m \nTime: \(location.timestamp) \nFloor: \(location.floor) \nHorizontal Accuracy : \(location.horizontalAccuracy) m"
+        SMLocationManager.getUserLocationAddress(location, handler: { (address, error) -> Void in
+            let addressString = "Address : \(address! as String)"
+            self.showLocalNotification(locationDetails+addressString) // You can update address into your backend
         })
     }
     //MARK: show local notification 
     func showLocalNotification(body : String) {
-        func checkLocalNotificationNeeded(location : CLLocation) {
-            let localNotification : UILocalNotification = UILocalNotification()
-            localNotification.alertAction = "Your Location"
-            localNotification.alertBody = body
-            localNotification.fireDate = NSDate()
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        }
+        let localNotification : UILocalNotification = UILocalNotification()
+        localNotification.alertAction = "Your Location"
+        localNotification.alertBody = body
+        localNotification.fireDate = NSDate()
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 }
 
