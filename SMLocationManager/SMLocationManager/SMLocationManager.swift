@@ -15,11 +15,15 @@ public typealias LocationAddressHandler = (address : String?,error: NSError?) ->
 public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var locationHandler : LocationHandler?
+    public static let sharedInstance = SMLocationManager()
     
     public func startStandardUpdate(handler :LocationHandler) {
         self.locationHandler =  handler
         self.locationManager.delegate = self
         self.trackLocationWithAuthorizationStatus()
+    }
+    public func startSignificantUpdate() {
+        self.locationManager.startMonitoringSignificantLocationChanges()
     }
     //MARK: Location Manager Delegate
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -35,7 +39,7 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
         }
     }
     //MARK: Stop Standard updates
-    func stopStandardUpdates(){
+    public func stopStandardUpdates(){
         self.locationManager.stopUpdatingLocation()
     }
     //MARK: Authorization Delegate method

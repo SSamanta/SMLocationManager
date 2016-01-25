@@ -98,9 +98,13 @@ typedef int swift_int4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC17SMLocationManager17SMLocationManager")
 @interface SMLocationManager : NSObject <CLLocationManagerDelegate>
-- (void)startStandardUpdated:(void (^ __nonnull)(CLLocation * __nullable, NSError * __nullable))handler;
++ (SMLocationManager * __nonnull)sharedInstance;
+- (void)startStandardUpdate:(void (^ __nonnull)(CLLocation * __nullable, NSError * __nullable))handler;
+- (void)startSignificantUpdate;
 - (void)locationManager:(CLLocationManager * __nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * __nonnull)locations;
 - (void)locationManager:(CLLocationManager * __nonnull)manager didFailWithError:(NSError * __nonnull)error;
+- (void)locationManager:(CLLocationManager * __nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
++ (void)getUserLocationAddress:(CLLocation * __nonnull)location handler:(void (^ __nonnull)(NSString * __nullable, NSError * __nullable))handler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

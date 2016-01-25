@@ -8,22 +8,21 @@
 
 import UIKit
 import SMLocationManager
+import CoreLocation
 
 class ViewController: UIViewController {
     @IBOutlet weak var locationLabel : UILabel!
-    let locationManager = SMLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.locationManager.startStandardUpdate {[weak self](location, error) -> Void in
-            if self != nil {
-                SMLocationManager.getUserLocationAddress(location!, handler: { (address, error) -> Void in
-                    let addressString = address! as String
-                   self?.locationLabel.text = addressString
-                })
-            }
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationUpdated:", name: "kLocationUpdated", object: nil)
     }
-
+    func locationUpdated(notification : NSNotification) {
+        let locatinDict = notification.userInfo
+        SMLocationManager.getUserLocationAddress(locatinDict!["location"] as! CLLocation, handler: { (address, error) -> Void in
+            let addressString = address! as String
+            self.locationLabel.text = addressString
+        })
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
