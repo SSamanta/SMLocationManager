@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 public typealias LocationHandler = (location : CLLocation?,error: NSError?) -> Void
+public typealias LocationAddressHandler = (address : String?,error: NSError?) -> Void
 
 public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
@@ -61,5 +62,34 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     func startLocationTracking(){
         self.locationManager.allowsBackgroundLocationUpdates = true
         self.locationManager.startUpdatingLocation()
+    }
+    // MARK: Get formatted Address of Location
+    public static func getUserLocationAddress(location : CLLocation, handler : LocationAddressHandler) {
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) -> Void in
+            if error != nil {
+                handler(address: nil,error: error)
+            }else if placemarks?.count > 0 {
+                let placemark = placemarks![0] as CLPlacemark
+                var addressString = ""
+                if let name = placemark.name {
+                    addressString += name + ","
+                }
+                if let thoroughfare = placemark.thoroughfare {
+                    addressString += thoroughfare + ","
+                }
+                if let subThoroughfare = placemark.subThoroughfare {
+                    addressString += subThoroughfare + ","
+                }
+                if let locality = placemark.locality {
+                    addressString += locality + ","
+                }
+                if let subLocality = placemark.subLocality {
+                    addressString += subLocality
+                }
+                handler(address: addressString, error: nil)
+            }else {
+                handler(address: nil, error: nil)
+            }
+        }
     }
 }

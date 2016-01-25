@@ -16,7 +16,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.locationManager.startStandardUpdate {[weak self](location, error) -> Void in
             if self != nil {
-                self!.locationLabel.text = "\(location) \(error)"
+                SMLocationManager.getUserLocationAddress(location!, handler: { (address, error) -> Void in
+                    let addressString = address! as String
+                   self?.locationLabel.text = addressString
+                })
             }
         }
     }
@@ -24,7 +27,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+    
 }
 
