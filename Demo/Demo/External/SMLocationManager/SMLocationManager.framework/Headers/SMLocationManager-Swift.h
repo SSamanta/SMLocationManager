@@ -103,6 +103,7 @@ SWIFT_CLASS("_TtC17SMLocationManager17SMLocationManager")
 - (void)startSignificantUpdate;
 - (void)locationManager:(CLLocationManager * __nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * __nonnull)locations;
 - (void)locationManager:(CLLocationManager * __nonnull)manager didFailWithError:(NSError * __nonnull)error;
+- (void)stopStandardUpdates;
 - (void)locationManager:(CLLocationManager * __nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status;
 + (void)getUserLocationAddress:(CLLocation * __nonnull)location handler:(void (^ __nonnull)(NSString * __nullable, NSError * __nullable))handler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
