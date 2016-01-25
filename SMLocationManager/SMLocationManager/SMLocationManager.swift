@@ -15,15 +15,10 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var locationHandler : LocationHandler?
     
-    public func startStandardUpdated(handler :LocationHandler) {
-        if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-            self.locationHandler =  handler
-            self.locationManager.delegate = self
-            self.locationManager.allowsBackgroundLocationUpdates = true
-            self.locationManager.startUpdatingLocation()
-        }else  if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
-            self.locationManager.requestAlwaysAuthorization()
-        }
+    public func startStandardUpdate(handler :LocationHandler) {
+        self.locationHandler =  handler
+        self.locationManager.delegate = self
+        self.trackLocationWithAuthorizationStatus()
     }
     //MARK: Location Manager Delegate
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -42,7 +37,10 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     func stopStandardUpdates(){
         self.locationManager.stopUpdatingLocation()
     }
-    
+    //MARK: Authorization Delegate method
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+        self.trackLocationWithAuthorizationStatus()
+    }
     //MARK: If it's a relatively recent event, turn off updates to save power.
     func getRecentLocation(locations :[CLLocation]) -> CLLocation? {
         let location = locations.last! as CLLocation
@@ -53,5 +51,15 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
         }
         return nil
     }
-    
+    func trackLocationWithAuthorizationStatus(){
+        if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+            self.startLocationTracking()
+        }else  if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+            self.locationManager.requestAlwaysAuthorization()
+        }
+    }
+    func startLocationTracking(){
+        self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.startUpdatingLocation()
+    }
 }
