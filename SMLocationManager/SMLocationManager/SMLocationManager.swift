@@ -65,6 +65,7 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
     }
     func startLocationTracking(){
         self.locationManager.allowsBackgroundLocationUpdates = true
+        self.locationManager.pausesLocationUpdatesAutomatically = true
         self.locationManager.startUpdatingLocation()
     }
     // MARK: Get formatted Address of Location
