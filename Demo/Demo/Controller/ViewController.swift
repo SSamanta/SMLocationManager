@@ -20,11 +20,10 @@ class ViewController: UIViewController {
         let locatinDict = notification.userInfo
         let location = locatinDict!["location"] as! CLLocation
         let locationDetails = "Speed : \(location.speed) m/s \nAltitude: \(location.altitude) m \nTime: \(location.timestamp) \nFloor: \(location.floor) \nHorizontal Accuracy : \(location.horizontalAccuracy) m"
+        self.locationLabel.text = locationDetails
         SMLocationManager.getUserLocationAddress(location, handler: { (address, error) -> Void in
             let addressString = address! as String
             self.locationLabel.text = locationDetails + "\nAddress: " + addressString
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.showLocalNotification( addressString)
         })
     }
     override func didReceiveMemoryWarning() {

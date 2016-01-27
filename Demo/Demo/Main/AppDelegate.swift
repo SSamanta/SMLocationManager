@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge], categories: nil))
-        self.startTrackingLocation()
+        
         return true
     }
 
@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        SMLocationManager.sharedInstance.stopStandardUpdates()
         SMLocationManager.sharedInstance.startSignificantUpdate()
     }
 
@@ -46,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        self.startTrackingLocation()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -55,8 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Configure Location Manager
     func startTrackingLocation(){
         SMLocationManager.sharedInstance.startStandardUpdate{(location, error) -> Void in
-            let locationInfo = ["location" as NSObject:location as! AnyObject]
-            NSNotificationCenter.defaultCenter().postNotificationName("kLocationUpdated", object: nil, userInfo: locationInfo)
+            if location != nil {
+                let locationInfo = ["location" as NSObject:location as! AnyObject]
+                NSNotificationCenter.defaultCenter().postNotificationName("kLocationUpdated", object: nil, userInfo: locationInfo)
+            }
         }
     }
     func locationUpdated(notification : NSNotification) {
