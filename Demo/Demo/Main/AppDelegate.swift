@@ -56,10 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: Configure Location Manager
     func startTrackingLocation(){
+        let logic = LocationLogicController()
         SMLocationManager.sharedInstance.startStandardUpdate{(location, error) -> Void in
             if location != nil {
-                let locationInfo = ["location" as NSObject:location as! AnyObject]
-                NSNotificationCenter.defaultCenter().postNotificationName("kLocationUpdated", object: nil, userInfo: locationInfo)
+                if logic.getValidLocation(location!) != nil {
+                    let locationInfo = ["location" as NSObject:location as! AnyObject]
+                    NSNotificationCenter.defaultCenter().postNotificationName("kLocationUpdated", object: nil, userInfo: locationInfo)
+                }
+                
             }
         }
     }

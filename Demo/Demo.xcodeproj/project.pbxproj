@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0CE5091C58D340003E517E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0CE5081C58D340003E517E /* ViewController.swift */; };
+		1C0CE50B1C58D376003E517E /* LocationLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0CE50A1C58D376003E517E /* LocationLogicController.swift */; };
 		1CACA9831C522E0D00D0CD85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CACA9821C522E0D00D0CD85 /* Assets.xcassets */; };
 		1CACA9911C522E0D00D0CD85 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA9901C522E0D00D0CD85 /* DemoTests.swift */; };
-		1CACA9AA1C5234B800D0CD85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA9A01C5234B800D0CD85 /* ViewController.swift */; };
 		1CACA9AB1C5234B800D0CD85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CACA9A21C5234B800D0CD85 /* AppDelegate.swift */; };
 		1CACA9AC1C5234B800D0CD85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACA9A51C5234B800D0CD85 /* LaunchScreen.storyboard */; };
 		1CACA9AD1C5234B800D0CD85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CACA9A71C5234B800D0CD85 /* Main.storyboard */; };
@@ -42,13 +43,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C0CE5081C58D340003E517E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1C0CE50A1C58D376003E517E /* LocationLogicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationLogicController.swift; sourceTree = "<group>"; };
 		1CACA9781C522E0D00D0CD85 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CACA9821C522E0D00D0CD85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CACA98C1C522E0D00D0CD85 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CACA9901C522E0D00D0CD85 /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		1CACA9921C522E0D00D0CD85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CACA99E1C5234B800D0CD85 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1CACA9A01C5234B800D0CD85 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1CACA9A21C5234B800D0CD85 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CACA9A61C5234B800D0CD85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1CACA9A81C5234B800D0CD85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,6 +76,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C0CE5051C58D340003E517E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1C0CE5061C58D340003E517E /* AppLogicController */,
+				1C0CE5071C58D340003E517E /* ViewController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1C0CE5061C58D340003E517E /* AppLogicController */ = {
+			isa = PBXGroup;
+			children = (
+				1C0CE50A1C58D376003E517E /* LocationLogicController.swift */,
+			);
+			path = AppLogicController;
+			sourceTree = "<group>";
+		};
+		1C0CE5071C58D340003E517E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C0CE5081C58D340003E517E /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		1CACA96F1C522E0D00D0CD85 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +122,9 @@
 		1CACA97A1C522E0D00D0CD85 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				1C0CE5051C58D340003E517E /* Controller */,
 				1CACA9821C522E0D00D0CD85 /* Assets.xcassets */,
 				1CACA99D1C5234B800D0CD85 /* Configs */,
-				1CACA99F1C5234B800D0CD85 /* Controller */,
 				1CACA9B31C5237C700D0CD85 /* External */,
 				1CACA9A11C5234B800D0CD85 /* Main */,
 				1CACA9A31C5234B800D0CD85 /* Model */,
@@ -121,14 +148,6 @@
 				1CACA99E1C5234B800D0CD85 /* Info.plist */,
 			);
 			path = Configs;
-			sourceTree = "<group>";
-		};
-		1CACA99F1C5234B800D0CD85 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1CACA9A01C5234B800D0CD85 /* ViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		1CACA9A11C5234B800D0CD85 /* Main */ = {
@@ -278,8 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C0CE5091C58D340003E517E /* ViewController.swift in Sources */,
 				1CACA9AB1C5234B800D0CD85 /* AppDelegate.swift in Sources */,
-				1CACA9AA1C5234B800D0CD85 /* ViewController.swift in Sources */,
+				1C0CE50B1C58D376003E517E /* LocationLogicController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
