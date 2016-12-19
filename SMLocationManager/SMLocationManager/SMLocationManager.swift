@@ -8,46 +8,70 @@
 
 import UIKit
 import CoreLocation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-public typealias LocationHandler = (location : CLLocation?,error: NSError?) -> Void
-public typealias LocationAddressHandler = (address : String?,error: NSError?) -> Void
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
 
-public class SMLocationManager: NSObject,CLLocationManagerDelegate {
+
+public typealias LocationHandler = (_ location : CLLocation?,_ error: NSError?) -> Void
+public typealias LocationAddressHandler = (_ address : String?,_ error: NSError?) -> Void
+
+open class SMLocationManager: NSObject,CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var locationHandler : LocationHandler?
-    public static let sharedInstance = SMLocationManager()
+    open static let sharedInstance = SMLocationManager()
     
-    public func startStandardUpdate(handler :LocationHandler) {
+    open func startStandardUpdate(_ handler :@escaping LocationHandler) {
         self.locationHandler =  handler
         self.locationManager.delegate = self
         self.trackLocationWithAuthorizationStatus()
     }
-    public func startSignificantUpdate() {
+    open func startSignificantUpdate() {
         self.locationManager.startMonitoringSignificantLocationChanges()
     }
     //MARK: Location Manager Delegate
-    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = self.getRecentLocation(locations) {
             if self.locationHandler != nil {
-                self.locationHandler!(location: location,error: nil)
+                self.locationHandler!(location,nil)
             }
         }
     }
-    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+    open func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          if self.locationHandler != nil {
-            self.locationHandler!(location: nil,error: error)
+            self.locationHandler!(nil,error as NSError?)
         }
     }
     //MARK: Stop Standard updates
-    public func stopStandardUpdates(){
+    open func stopStandardUpdates(){
         self.locationManager.stopUpdatingLocation()
     }
     //MARK: Authorization Delegate method
-    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+    open func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         self.trackLocationWithAuthorizationStatus()
     }
     //MARK: If it's a relatively recent event, turn off updates to save power.
-    func getRecentLocation(locations :[CLLocation]) -> CLLocation? {
+    func getRecentLocation(_ locations :[CLLocation]) -> CLLocation? {
         let location = locations.last! as CLLocation
         let eventDate = location.timestamp
         let howRecent = eventDate.timeIntervalSinceNow
@@ -57,9 +81,9 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
         return nil
     }
     func trackLocationWithAuthorizationStatus(){
-        if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
             self.startLocationTracking()
-        }else  if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+        }else  if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
             self.locationManager.requestAlwaysAuthorization()
         }
     }
@@ -69,10 +93,10 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
     }
     // MARK: Get formatted Address of Location
-    public static func getUserLocationAddress(location : CLLocation, handler : LocationAddressHandler) {
+    open static func getUserLocationAddress(_ location : CLLocation, handler : @escaping LocationAddressHandler) {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) -> Void in
             if error != nil {
-                handler(address: nil,error: error)
+                handler(nil,error as NSError?)
             }else if placemarks?.count > 0 {
                 let placemark = placemarks![0] as CLPlacemark
                 var addressString = ""
@@ -91,9 +115,9 @@ public class SMLocationManager: NSObject,CLLocationManagerDelegate {
                 if let subLocality = placemark.subLocality {
                     addressString += subLocality
                 }
-                handler(address: addressString, error: nil)
+                handler(addressString, nil)
             }else {
-                handler(address: nil, error: nil)
+                handler(nil, nil)
             }
         }
     }

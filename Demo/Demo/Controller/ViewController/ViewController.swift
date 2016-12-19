@@ -14,9 +14,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var locationLabel : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationUpdated:", name: "kLocationUpdated", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.locationUpdated(_:)), name: NSNotification.Name(rawValue: "kLocationUpdated"), object: nil)
     }
-    func locationUpdated(notification : NSNotification) {
+    func locationUpdated(_ notification : Notification) {
         let locatinDict = notification.userInfo
         let location = locatinDict!["location"] as! CLLocation
         let locationDetails = "Speed : \(location.speed) m/s \nAltitude: \(location.altitude) m \nTime: \(location.timestamp) \nFloor: \(location.floor) \nHorizontal Accuracy : \(location.horizontalAccuracy) m"

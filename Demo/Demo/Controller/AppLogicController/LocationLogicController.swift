@@ -12,10 +12,10 @@ import CoreLocation
 class LocationLogicController: NSObject {
     var latestValidLocation : CLLocation?
     
-    func getValidLocation(location : CLLocation)-> CLLocation? {
+    func getValidLocation(_ location : CLLocation)-> CLLocation? {
         if location.horizontalAccuracy < 100 {
             if latestValidLocation != nil {
-                let timeDifference = location.timestamp.timeIntervalSinceDate(self.latestValidLocation!.timestamp)
+                let timeDifference = location.timestamp.timeIntervalSince(self.latestValidLocation!.timestamp)
                 if timeDifference > 10 {
                     self.latestValidLocation = location
                     return self.latestValidLocation
